@@ -9,7 +9,7 @@ function process() { // eslint-disable-line no-unused-vars
   function d(id) { var x = e(id).date || new Date(e(id).value); return x.getTime() ? x : new Date(); }
   function n(id) { var x = v(id); return typeof x == 'number' ? x : parseFloat(x, 10); }
 
-  var doc = new window.SEPA.Document();
+  var doc = new window.SEPA.Document('pain.008.001.02');
   doc.grpHdr.id = v('grpHdr-id');
   doc.grpHdr.created = new Date();
   doc.grpHdr.initiatorName = v('grpHdr-initiatorName');
@@ -32,10 +32,9 @@ function process() { // eslint-disable-line no-unused-vars
   tx.remittanceInfo = v('tx-remittanceInfo');
   info.addTransaction(tx);
 
-  var hdr = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>';
   //document.getElementById('results').textContent =  hdr + '\n' + vkbeautify.xml(doc.toString(), '  ');
   var results = document.getElementById('results');
-  results.src = 'data:text/xml,' + hdr + doc.toString();
+  results.src = 'data:text/xml,' + doc.toString();
   results.style.display = 'block';
   results.style.height = (document.body.scrollHeight - 40) + 'px';
 }
